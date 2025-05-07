@@ -1,7 +1,7 @@
-CREATE TABLE visitors (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    ip_address VARCHAR(45),
-    user_agent VARCHAR(255),
-    page_visited VARCHAR(255),
-    visit_time DATETIME DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS visitors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent TEXT,
+    page_visited VARCHAR(255) NOT NULL,
+    visit_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 

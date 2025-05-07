@@ -44,22 +44,115 @@ $recent_posts = $stmt->fetchAll();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- Custom CSS -->
   <style>
+    :root {
+      --dark-bg: #1a1a1a;
+      --dark-card: #2d2d2d;
+      --dark-text: #ffffff;
+      --dark-border: #404040;
+    }
+
+    body {
+      background-color: var(--dark-bg) !important;
+      color: var(--dark-text) !important;
+    }
+
+    .wrapper {
+      background-color: var(--dark-bg) !important;
+    }
+
+    .content-wrapper {
+      background-color: var(--dark-bg) !important;
+    }
+
+    .card {
+      background-color: var(--dark-card) !important;
+      border-color: var(--dark-border) !important;
+    }
+
+    .card-header {
+      background-color: var(--dark-card) !important;
+      border-bottom-color: var(--dark-border) !important;
+    }
+
+    .table {
+      color: var(--dark-text) !important;
+    }
+
+    .table td, .table th {
+      border-color: var(--dark-border) !important;
+    }
+
+    .main-header {
+      background-color: var(--dark-card) !important;
+      border-bottom-color: var(--dark-border) !important;
+    }
+
+    .main-sidebar {
+      background-color: var(--dark-card) !important;
+    }
+
+    .nav-sidebar .nav-link {
+      color: var(--dark-text) !important;
+    }
+
+    .nav-sidebar .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .nav-sidebar .nav-link.active {
+      background-color: #007bff !important;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: var(--dark-text);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid var(--dark-border);
+    }
+
+    .small-box {
+      background-color: var(--dark-card) !important;
+      border: 1px solid var(--dark-border) !important;
+    }
+
+    .small-box .inner {
+      color: var(--dark-text) !important;
+    }
+
+    .small-box .icon {
+      color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .small-box-footer {
+      background-color: rgba(0, 0, 0, 0.1) !important;
+      color: var(--dark-text) !important;
+    }
+
+    .main-footer {
+      background-color: var(--dark-card) !important;
+      border-top-color: var(--dark-border) !important;
+      color: var(--dark-text) !important;
+    }
+
+    .brand-link {
+      border-bottom-color: var(--dark-border) !important;
+    }
+
+    .user-panel {
+      border-bottom-color: var(--dark-border) !important;
+    }
+
     .dashboard-card {
       transition: transform 0.3s;
     }
     .dashboard-card:hover {
       transform: translateY(-5px);
     }
-    .welcome-section {
-      background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
   </style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini dark-mode">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
