@@ -6,12 +6,24 @@ if (!isset($_SESSION['user_id'])) {
 }
 require_once 'config/database.php';
 
+// Track visitor
+$ip_address = $_SERVER['REMOTE_ADDR'];
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+$page_visited = 'dashboard.php';
+
+$stmt = $pdo->prepare("INSERT INTO visitors (ip_address, user_agent, page_visited) VALUES (?, ?, ?)");
+$stmt->execute([$ip_address, $user_agent, $page_visited]);
+
 // Get statistics
 $stmt = $pdo->query("SELECT COUNT(*) as total_posts FROM posts");
 $total_posts = $stmt->fetch()['total_posts'];
 
 $stmt = $pdo->query("SELECT COUNT(*) as total_users FROM users");
 $total_users = $stmt->fetch()['total_users'];
+
+// Get recent visitors
+$stmt = $pdo->query("SELECT * FROM visitors ORDER BY visit_time DESC LIMIT 10");
+$recent_visitors = $stmt->fetchAll();
 
 // Get recent posts
 $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 5");
@@ -132,7 +144,7 @@ $recent_posts = $stmt->fetchAll();
       <div class="container-fluid">
         <!-- Welcome Section -->
         <div class="welcome-section">
-          <h2><i class="fas fa-user-circle mr-2"></i>Selamat Datang, <?php echo $_SESSION['username']; ?>!</h2>
+          <h2><i class="fas fa-user-circle mr-2"></i>Selamat Datang di Risma Depa Yulianawati</h2>
           <p class="mb-0">Selamat datang di CMS Sederhana. Anda dapat mengelola konten dan pengguna dari sini.</p>
         </div>
 
@@ -234,6 +246,46 @@ $recent_posts = $stmt->fetchAll();
               <div class="card-footer clearfix">
                 <a href="pages/posts.php" class="btn btn-sm btn-secondary float-right">View All Posts</a>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Visitors -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-users mr-1"></i>
+                  Daftar Pengunjung Terakhir
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                      <tr>
+                        <th>IP Address</th>
+                        <th>Browser</th>
+                        <th>Halaman</th>
+                        <th>Waktu Kunjungan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($recent_visitors as $visitor): ?>
+                      <tr>
+                        <td><?php echo htmlspecialchars($visitor['ip_address']); ?></td>
+                        <td><?php echo htmlspecialchars($visitor['user_agent']); ?></td>
+                        <td><?php echo htmlspecialchars($visitor['page_visited']); ?></td>
+                        <td><?php echo date('d M Y H:i', strtotime($visitor['visit_time'])); ?></td>
+                      </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- /.card-body -->
             </div>
           </div>
         </div>
