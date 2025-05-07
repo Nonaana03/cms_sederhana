@@ -42,117 +42,35 @@ $recent_posts = $stmt->fetchAll();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <!-- FullCalendar CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
   <!-- Custom CSS -->
   <style>
-    :root {
-      --dark-bg: #1a1a1a;
-      --dark-card: #2d2d2d;
-      --dark-text: #ffffff;
-      --dark-border: #404040;
-    }
-
-    body {
-      background-color: var(--dark-bg) !important;
-      color: var(--dark-text) !important;
-    }
-
-    .wrapper {
-      background-color: var(--dark-bg) !important;
-    }
-
-    .content-wrapper {
-      background-color: var(--dark-bg) !important;
-    }
-
-    .card {
-      background-color: var(--dark-card) !important;
-      border-color: var(--dark-border) !important;
-    }
-
-    .card-header {
-      background-color: var(--dark-card) !important;
-      border-bottom-color: var(--dark-border) !important;
-    }
-
-    .table {
-      color: var(--dark-text) !important;
-    }
-
-    .table td, .table th {
-      border-color: var(--dark-border) !important;
-    }
-
-    .main-header {
-      background-color: var(--dark-card) !important;
-      border-bottom-color: var(--dark-border) !important;
-    }
-
-    .main-sidebar {
-      background-color: var(--dark-card) !important;
-    }
-
-    .nav-sidebar .nav-link {
-      color: var(--dark-text) !important;
-    }
-
-    .nav-sidebar .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    .nav-sidebar .nav-link.active {
-      background-color: #007bff !important;
-    }
-
-    .welcome-section {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: var(--dark-text);
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      border: 1px solid var(--dark-border);
-    }
-
-    .small-box {
-      background-color: var(--dark-card) !important;
-      border: 1px solid var(--dark-border) !important;
-    }
-
-    .small-box .inner {
-      color: var(--dark-text) !important;
-    }
-
-    .small-box .icon {
-      color: rgba(255, 255, 255, 0.15) !important;
-    }
-
-    .small-box-footer {
-      background-color: rgba(0, 0, 0, 0.1) !important;
-      color: var(--dark-text) !important;
-    }
-
-    .main-footer {
-      background-color: var(--dark-card) !important;
-      border-top-color: var(--dark-border) !important;
-      color: var(--dark-text) !important;
-    }
-
-    .brand-link {
-      border-bottom-color: var(--dark-border) !important;
-    }
-
-    .user-panel {
-      border-bottom-color: var(--dark-border) !important;
-    }
-
     .dashboard-card {
       transition: transform 0.3s;
     }
     .dashboard-card:hover {
       transform: translateY(-5px);
     }
+    .welcome-section {
+      background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .calendar-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    }
+    .fc-event {
+      cursor: pointer;
+    }
   </style>
 </head>
-<body class="hold-transition sidebar-mini dark-mode">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -298,6 +216,23 @@ $recent_posts = $stmt->fetchAll();
         </div>
         <!-- /.row -->
 
+        <!-- Calendar Section -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-calendar-alt mr-1"></i>
+                  Kalender
+                </h3>
+              </div>
+              <div class="card-body">
+                <div id="calendar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Recent Posts -->
         <div class="row">
           <div class="col-md-12">
@@ -401,5 +336,43 @@ $recent_posts = $stmt->fetchAll();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        locale: 'id',
+        buttonText: {
+            today: 'Hari Ini',
+            month: 'Bulan',
+            week: 'Minggu',
+            day: 'Hari'
+        },
+        events: [
+            {
+                title: 'Meeting',
+                start: '2024-03-20',
+                color: '#007bff'
+            },
+            {
+                title: 'Deadline Project',
+                start: '2024-03-25',
+                color: '#dc3545'
+            }
+        ],
+        eventClick: function(info) {
+            alert('Event: ' + info.event.title);
+        }
+    });
+    calendar.render();
+});
+</script>
 </body>
 </html> 
