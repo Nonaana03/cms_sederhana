@@ -13,4 +13,15 @@ CREATE TABLE IF NOT EXISTS sales (
     amount DECIMAL(10,2) NOT NULL,
     sale_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create comments table
+CREATE TABLE IF NOT EXISTS comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT,
+    user_id INT,
+    comment_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ); 
