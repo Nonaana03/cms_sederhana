@@ -1,8 +1,9 @@
 <?php
 $host = 'localhost';
-$dbname = 'cms_sederhana';
 $username = 'root';
-$password = '';
+$password = ''; // kosong jika menggunakan XAMPP
+$dbname = 'cms_sederhana';
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
