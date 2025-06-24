@@ -426,6 +426,55 @@ $recent_posts = $stmt->fetchAll();
       color: #4a90e2 !important;
       background: rgba(74, 144, 226, 0.1) !important;
     }
+    
+    /* Direct Chat Compact Styles */
+    .direct-chat-messages {
+      height: 180px !important;
+      font-size: 0.92rem !important;
+      padding: 10px 8px !important;
+    }
+    .direct-chat-msg, .direct-chat-msg.right {
+      margin-bottom: 10px !important;
+    }
+    .direct-chat-img {
+      width: 28px !important;
+      height: 28px !important;
+      font-size: 14px !important;
+      min-width: 28px !important;
+      min-height: 28px !important;
+      margin-right: 6px !important;
+    }
+    .direct-chat-text {
+      font-size: 0.95rem !important;
+      padding: 6px 12px !important;
+      border-radius: 12px !important;
+    }
+    .direct-chat-name {
+      font-size: 0.95rem !important;
+    }
+    .direct-chat-timestamp {
+      font-size: 0.85rem !important;
+    }
+    .direct-chat .card-footer .form-control {
+      font-size: 0.95rem !important;
+      padding: 6px 10px !important;
+      border-radius: 14px !important;
+    }
+    .direct-chat .btn-primary {
+      padding: 6px 16px !important;
+      font-size: 0.95rem !important;
+      border-radius: 14px !important;
+    }
+    .direct-chat .input-group {
+      min-height: 36px !important;
+    }
+    .direct-chat .card-header, .direct-chat .card-footer {
+      padding-top: 8px !important;
+      padding-bottom: 8px !important;
+    }
+    .direct-chat .card-title {
+      font-size: 1.05rem !important;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -558,9 +607,10 @@ $recent_posts = $stmt->fetchAll();
         </div>
         <!-- /.row -->
 
-        <!-- Monthly Recap Report (Chart + Progress) -->
+        <!-- Monthly Recap Report, Goal Completion, and Direct Chat -->
         <div class="row">
           <div class="col-md-6">
+            <!-- Monthly Recap Report -->
             <div class="card">
               <div class="card-header border-transparent">
                 <h3 class="card-title">Monthly Recap Report</h3>
@@ -622,7 +672,8 @@ $recent_posts = $stmt->fetchAll();
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card">
+            <!-- Goal Completion -->
+            <div class="card mb-3">
               <div class="card-header">
                 <h3 class="card-title">Goal Completion</h3>
               </div>
@@ -655,6 +706,98 @@ $recent_posts = $stmt->fetchAll();
                     <div class="progress-bar bg-warning" style="width: 50%"></div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <!-- Direct Chat Widget -->
+            <div class="card direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-comments mr-1"></i>
+                  Direct Chat
+                </h3>
+                <div class="card-tools">
+                  <span title="3 New Messages" class="badge badge-primary">3</span>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="direct-chat-messages" style="height: 180px;">
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">
+                        <i class="fas fa-user-shield mr-1"></i>Admin
+                      </span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                    </div>
+                    <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                    <div class="direct-chat-text">
+                      Apakah ada yang bisa saya bantu?
+                    </div>
+                  </div>
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">
+                        <i class="fas fa-user mr-1"></i>User
+                      </span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                    </div>
+                    <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <div class="direct-chat-text">
+                      Ya, saya ingin bertanya tentang fitur baru
+                    </div>
+                  </div>
+
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">
+                        <i class="fas fa-user-shield mr-1"></i>Admin
+                      </span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 2:10 pm</span>
+                    </div>
+                    <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                    <div class="direct-chat-text">
+                      Silakan, fitur apa yang ingin Anda tanyakan?
+                    </div>
+                  </div>
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">
+                        <i class="fas fa-user mr-1"></i>User
+                      </span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 2:15 pm</span>
+                    </div>
+                    <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <div class="direct-chat-text">
+                      Bagaimana cara menambah post baru?
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <div class="input-group">
+                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Send</button>
+                    </span>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -798,87 +941,78 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
     
-    // Chat functionality
-    const chatForm = document.querySelector('.direct-chat form');
-    const chatInput = document.querySelector('.direct-chat input[name="message"]');
-    const chatMessages = document.querySelector('.direct-chat-messages');
-    
-    if (chatForm && chatInput && chatMessages) {
-        chatForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            sendMessage();
-        });
-        
-        // Send button click
-        const sendButton = document.querySelector('.direct-chat .btn-primary');
-        if (sendButton) {
-            sendButton.addEventListener('click', sendMessage);
-        }
-        
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                const currentTime = new Date().toLocaleTimeString('id-ID', {
+    // Chat functionality for the direct chat below Goal Completion
+    const directChat = document.querySelector('.direct-chat');
+    if (directChat) {
+      const chatForm = directChat.querySelector('form');
+      const chatInput = directChat.querySelector('input[name="message"]');
+      const chatMessages = directChat.querySelector('.direct-chat-messages');
+      const sendButton = directChat.querySelector('.btn-primary');
+
+      function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+          const currentTime = new Date().toLocaleTimeString('id-ID', {
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          const messageHTML = `
+            <div class="direct-chat-msg right">
+              <div class="direct-chat-infos clearfix">
+                <span class="direct-chat-name float-right"><i class="fas fa-user mr-1"></i>You</span>
+                <span class="direct-chat-timestamp float-left">${currentTime}</span>
+              </div>
+              <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                <i class="fas fa-user"></i>
+              </span>
+              <div class="direct-chat-text">
+                ${message}
+              </div>
+            </div>
+          `;
+          chatMessages.insertAdjacentHTML('beforeend', messageHTML);
+          chatInput.value = '';
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          setTimeout(() => {
+            const responseHTML = `
+              <div class="direct-chat-msg">
+                <div class="direct-chat-infos clearfix">
+                  <span class="direct-chat-name float-left"><i class="fas fa-user-shield mr-1"></i>Admin</span>
+                  <span class="direct-chat-timestamp float-right">${new Date().toLocaleTimeString('id-ID', {
                     hour: '2-digit',
                     minute: '2-digit'
-                });
-                
-                const messageHTML = `
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-right">
-                                <i class="fas fa-user mr-1"></i>You
-                            </span>
-                            <span class="direct-chat-timestamp float-left">${currentTime}</span>
-                        </div>
-                        <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                          <i class="fas fa-user"></i>
-                        </span>
-                        <div class="direct-chat-text">
-                            ${message}
-                        </div>
-                    </div>
-                `;
-                
-                chatMessages.insertAdjacentHTML('beforeend', messageHTML);
-                chatInput.value = '';
-                
-                // Auto scroll to bottom
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                
-                // Simulate admin response after 2 seconds
-                setTimeout(() => {
-                    const responseHTML = `
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">
-                                    <i class="fas fa-user-shield mr-1"></i>Admin
-                                </span>
-                                <span class="direct-chat-timestamp float-right">${new Date().toLocaleTimeString('id-ID', {
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                })}</span>
-                            </div>
-                            <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                              <i class="fas fa-user-shield"></i>
-                            </span>
-                            <div class="direct-chat-text">
-                                Terima kasih atas pesannya! Tim kami akan segera merespons.
-                            </div>
-                        </div>
-                    `;
-                    chatMessages.insertAdjacentHTML('beforeend', responseHTML);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }, 2000);
-            }
+                  })}</span>
+                </div>
+                <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
+                  <i class="fas fa-user-shield"></i>
+                </span>
+                <div class="direct-chat-text">
+                  Terima kasih atas pesannya! Tim kami akan segera merespons.
+                </div>
+              </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', responseHTML);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 2000);
         }
-        
-        // Enter key to send message
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
+      }
+
+      if (chatForm) {
+        chatForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          sendMessage();
         });
+      }
+      if (sendButton) {
+        sendButton.addEventListener('click', sendMessage);
+      }
+      if (chatInput) {
+        chatInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+      }
     }
 });
 
