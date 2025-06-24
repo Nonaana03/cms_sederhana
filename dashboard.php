@@ -9,10 +9,9 @@ require_once 'config/database.php';
 // Track visitor
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-$page_visited = 'dashboard.php';
 
-$stmt = $pdo->prepare("INSERT INTO visitors (ip_address, user_agent, page_visited) VALUES (?, ?, ?)");
-$stmt->execute([$ip_address, $user_agent, $page_visited]);
+$stmt = $pdo->prepare("INSERT INTO visitors (ip_address, user_agent) VALUES (?, ?)");
+$stmt->execute([$ip_address, $user_agent]);
 
 // Get statistics
 $stmt = $pdo->query("SELECT COUNT(*) as total_posts FROM posts");
@@ -296,7 +295,6 @@ $recent_posts = $stmt->fetchAll();
                       <tr>
                         <th>IP Address</th>
                         <th>Browser</th>
-                        <th>Halaman</th>
                         <th>Waktu Kunjungan</th>
                       </tr>
                     </thead>
@@ -305,7 +303,6 @@ $recent_posts = $stmt->fetchAll();
                       <tr>
                         <td><?php echo htmlspecialchars($visitor['ip_address']); ?></td>
                         <td><?php echo htmlspecialchars($visitor['user_agent']); ?></td>
-                        <td><?php echo htmlspecialchars($visitor['page_visited']); ?></td>
                         <td><?php echo date('d M Y H:i', strtotime($visitor['visit_time'])); ?></td>
                       </tr>
                       <?php endforeach; ?>
