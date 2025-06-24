@@ -43,6 +43,8 @@ $recent_posts = $stmt->fetchAll();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
   <!-- FullCalendar CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Custom CSS -->
   <style>
     /* Dark Mode Styles */
@@ -517,168 +519,142 @@ $recent_posts = $stmt->fetchAll();
 
         <!-- Info boxes -->
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info dashboard-card">
-              <div class="inner">
-                <h3><?php echo $total_posts; ?></h3>
-                <p>Total Posts</p>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-info">
+              <span class="info-box-icon"><i class="fas fa-cogs"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">CPU Traffic</span>
+                <span class="info-box-number">10<small>%</small></span>
               </div>
-              <div class="icon">
-                <i class="fas fa-file-alt"></i>
-              </div>
-              <a href="pages/posts.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-success dashboard-card">
-              <div class="inner">
-                <h3><?php echo $total_users; ?></h3>
-                <p>Total Users</p>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-danger">
+              <span class="info-box-icon"><i class="fas fa-thumbs-up"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Likes</span>
+                <span class="info-box-number">41,410</span>
               </div>
-              <div class="icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <a href="pages/users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning dashboard-card">
-              <div class="inner">
-                <h3>New</h3>
-                <p>User Registrations</p>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-success">
+              <span class="info-box-icon"><i class="fas fa-shopping-cart"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Sales</span>
+                <span class="info-box-number">760</span>
               </div>
-              <div class="icon">
-                <i class="fas fa-user-plus"></i>
-              </div>
-              <a href="pages/users.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger dashboard-card">
-              <div class="inner">
-                <h3>65</h3>
-                <p>Unique Visitors</p>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box bg-warning">
+              <span class="info-box-icon"><i class="fas fa-users"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">New Members</span>
+                <span class="info-box-number">2,000</span>
               </div>
-              <div class="icon">
-                <i class="fas fa-chart-pie"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
         </div>
         <!-- /.row -->
 
-        <!-- Calendar Section -->
+        <!-- Monthly Recap Report (Chart + Progress) -->
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-calendar-alt mr-1"></i>
-                  Kalender
-                </h3>
-              </div>
-              <div class="card-body">
-                <div id="calendar"></div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Direct Chat Widget -->
-          <div class="col-md-4">
-            <div class="card direct-chat direct-chat-primary">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-comments mr-1"></i>
-                  Direct Chat
-                </h3>
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Monthly Recap Report</h3>
                 <div class="card-tools">
-                  <span title="3 New Messages" class="badge badge-primary">3</span>
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                 </div>
               </div>
               <div class="card-body">
-                <div class="direct-chat-messages" style="height: 300px;">
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">
-                        <i class="fas fa-user-shield mr-1"></i>Admin
-                      </span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                    </div>
-                    <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                      <i class="fas fa-user-shield"></i>
-                    </span>
-                    <div class="direct-chat-text">
-                      Apakah ada yang bisa saya bantu?
-                    </div>
-                  </div>
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-right">
-                        <i class="fas fa-user mr-1"></i>User
-                      </span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                    </div>
-                    <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <div class="direct-chat-text">
-                      Ya, saya ingin bertanya tentang fitur baru
-                    </div>
-                  </div>
-
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">
-                        <i class="fas fa-user-shield mr-1"></i>Admin
-                      </span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:10 pm</span>
-                    </div>
-                    <span class="direct-chat-img bg-primary text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                      <i class="fas fa-user-shield"></i>
-                    </span>
-                    <div class="direct-chat-text">
-                      Silakan, fitur apa yang ingin Anda tanyakan?
-                    </div>
-                  </div>
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-right">
-                        <i class="fas fa-user mr-1"></i>User
-                      </span>
-                      <span class="direct-chat-timestamp float-left">23 Jan 2:15 pm</span>
-                    </div>
-                    <span class="direct-chat-img bg-success text-white d-flex align-items-center justify-content-center" style="width:40px;height:40px;border-radius:50%;font-size:20px;">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <div class="direct-chat-text">
-                      Bagaimana cara menambah post baru?
-                    </div>
-                  </div>
+                <div class="d-flex">
+                  <p class="d-flex flex-column">
+                    <span class="text-bold text-lg">Sales: 1 Jan, 2014 - 30 Jul, 2014</span>
+                  </p>
+                </div>
+                <div class="position-relative mb-4">
+                  <canvas id="areaChart" height="100"></canvas>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                  <span class="mr-2">
+                    <i class="fas fa-square text-primary"></i> This year
+                  </span>
+                  <span>
+                    <i class="fas fa-square text-gray"></i> Last year
+                  </span>
                 </div>
               </div>
               <div class="card-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                    <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Send</button>
-                    </span>
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
+                      <h5 class="description-header">$35,210.43</h5>
+                      <span class="description-text">TOTAL REVENUE</span>
+                    </div>
                   </div>
-                </form>
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
+                      <h5 class="description-header">$10,390.90</h5>
+                      <span class="description-text">TOTAL COST</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
+                      <h5 class="description-header">$24,813.53</h5>
+                      <span class="description-text">TOTAL PROFIT</span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
+                      <h5 class="description-header">1200</h5>
+                      <span class="description-text">GOAL COMPLETIONS</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Goal Completion</h3>
+              </div>
+              <div class="card-body">
+                <div class="progress-group">
+                  Add Products to Cart
+                  <span class="float-right"><b>160</b>/200</span>
+                  <div class="progress progress-sm">
+                    <div class="progress-bar bg-primary" style="width: 80%"></div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  Complete Purchase
+                  <span class="float-right"><b>310</b>/400</span>
+                  <div class="progress progress-sm">
+                    <div class="progress-bar bg-danger" style="width: 77.5%"></div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  Visit Premium Page
+                  <span class="float-right"><b>480</b>/800</span>
+                  <div class="progress progress-sm">
+                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                  </div>
+                </div>
+                <div class="progress-group">
+                  Send Inquiries
+                  <span class="float-right"><b>250</b>/500</span>
+                  <div class="progress progress-sm">
+                    <div class="progress-bar bg-warning" style="width: 50%"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -904,6 +880,37 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+});
+
+// Chart.js Area Chart
+const ctxArea = document.getElementById('areaChart').getContext('2d');
+const areaChart = new Chart(ctxArea, {
+  type: 'line',
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'This year',
+        data: [50, 60, 70, 80, 60, 75, 90],
+        backgroundColor: 'rgba(74,144,226,0.2)',
+        borderColor: 'rgba(74,144,226,1)',
+        fill: true,
+        tension: 0.4
+      },
+      {
+        label: 'Last year',
+        data: [30, 40, 50, 60, 40, 55, 70],
+        backgroundColor: 'rgba(200,200,200,0.2)',
+        borderColor: 'rgba(200,200,200,1)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true } }
+  }
 });
 </script>
 </body>
